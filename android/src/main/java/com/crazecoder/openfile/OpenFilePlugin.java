@@ -395,14 +395,16 @@ public class OpenFilePlugin implements MethodCallHandler
 
     @Override
     public void onAttachedToActivity(ActivityPluginBinding binding) {
-        channel =
+        if(flutterPluginBinding!=null){
+           channel =
                 new MethodChannel(
                         flutterPluginBinding.getBinaryMessenger(), "open_file");
-        context = flutterPluginBinding.getApplicationContext();
-        activity = binding.getActivity();
-        channel.setMethodCallHandler(this);
-        binding.addRequestPermissionsResultListener(this);
-        binding.addActivityResultListener(this);
+           context = flutterPluginBinding.getApplicationContext();
+           activity = binding.getActivity();
+           channel.setMethodCallHandler(this);
+           binding.addRequestPermissionsResultListener(this);
+           binding.addActivityResultListener(this);
+        }
     }
 
     @Override
